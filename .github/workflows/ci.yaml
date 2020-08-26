@@ -3,12 +3,12 @@ name: Lint and Test Charts
 on:
   push:
     branches:
-      - 'renovate/**'
+      - 'unms/**'
     paths:
-      - 'charts/**'
+      - 'unms/**'
   pull_request:
     paths:
-      - 'charts/**'
+      - 'unms/**'
 
 jobs:
   lint-chart:
