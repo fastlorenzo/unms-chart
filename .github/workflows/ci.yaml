@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'unms/**'
-  pull_request:
-    paths:
-      - 'unms/**'
+    # paths:
+    #   - 'unms/**'
+  # pull_request:
+  #   paths:
+  #     - 'unms/**'
 
 jobs:
   lint-chart:
@@ -20,7 +20,7 @@ jobs:
         uses: helm/chart-testing-action@master
         with:
           command: lint
-          config: .github/ct.yaml
+          config: bash .github/ct.yaml
 
   lint-docs:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Run helm-docs
-        run: .github/helm-docs.sh
+        run: bash .github/helm-docs.sh
 
   kubeval-chart:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
       - name: Run kubeval
         env:
           KUBERNETES_VERSION: ${{ matrix.k8s }}
-        run: .github/kubeval.sh
+        run: bash .github/kubeval.sh
 
   install-chart:
     name: install-chart
