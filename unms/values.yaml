@@ -1,10 +1,46 @@
-# podName -- Name of the UNMS pod
-podName: unms
+# nameOverride -- Override chart name
+nameOverride: ""
 
-# image -- UNMS docker image
-image: ubnt/unms
-# tag -- UNMS docker tag
-tag: 0.10.4
+unms:
+  # unms.podAnnotations -- Annotations for UNMS pods
+  podAnnotations: {}
+    # iam.amazonaws.com/role: unms
+  # unms.image -- UNMS docker image name
+  image: ubnt/unms
+  # unms.imageTag -- UNMS docker image tag
+  imageTag: "0.10.4"
+  # unms.imagePullPolicy -- UNMS docker image pull policy
+  imagePullPolicy: "IfNotPresent"
+  # unms.podManagementPolicy -- UNMS pods management policy
+  podManagementPolicy: "Parallel"
+  # unms.updateStrategy -- UNMS pods update strategy
+  updateStrategy: "RollingUpdate"
+  # unms.labels -- UNMS pod extra labels
+  labels: {}
+  # unms.replicas -- Number of UNMS replicas
+  replicas: 1
+  # unms.resources -- UNMS pods resources
+  resources: {}
+    # requests:
+    #   cpu: 0.1
+    #   memory: 100
+    # limits:
+    #   cpu: "1000m"
+    #   memory: "2Gi"
+  persistence:
+    # unms.persistence.enabled -- Persist UNMS data
+    enabled: true
+    annotations: {}
+    # unms.persistence.existingClaim -- Name of existing PVC for UNMS data
+    existingClaim: "unms-storage-nfs"
+    # unms.persistence.accessModes -- UNMS storage access modes
+    accessModes:
+      - ReadWriteOnce
+    # unms.persistence.size -- UNMS storage size
+    size: 10Gi
+    # unms.persistence.storageClass -- UNMS PV storage class name, keep empty to use default.
+    # Not used if `existingClaim` is set.
+    storageClass: ""
 
 # rbmqImage -- RabitMQ docker image
 rbmqImage: rabbitmq:latest
@@ -13,8 +49,6 @@ DBimage: postgres:latest
 # redisImage -- Redis docker image
 redisImage: redis:latest
 
-# replicas -- Number of replicas
-replicas: 1
 # vhost -- Hostname used to reach UNMS
 vhost: unms.domain.tld
 # clusterDomain -- K8S cluster domain name
