@@ -1,19 +1,33 @@
+# podName -- Name of the UNMS pod
 podName: unms
 
+# image -- UNMS docker image
 image: ubnt/unms
+# tag -- UNMS docker tag
 tag: 0.10.4
 
+# rbmqImage -- RabitMQ docker image
 rbmqImage: rabbitmq:latest
+# DBimage -- PostgreSQL docker image
 DBimage: postgres:latest
+# redisImage -- Redis docker image
 redisImage: redis:latest
 
+# replicas -- Number of replicas
 replicas: 1
+# vhost -- Hostname used to reach UNMS
 vhost: unms.domain.tld
+# clusterDomain -- K8S cluster domain name
 clusterDomain: cluster.local
 
+# volumeSize -- UNMS storage volume size
 volumeSize: 2Gi
+# DBSize -- PostgreSQL storage volume size
 DBSize: 10Gi
 
+# postgresDBuser -- PostgreSQL DB username
 postgresDBuser: unms
+# postgresDBname -- PostgreSQL DB name
 postgresDBname: unms
+# postgresDBpassword -- PostgreSQL DB password
 postgresDBpassword: PassWord

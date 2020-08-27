@@ -1,2 +1,14 @@
+apiVersion: v3
 name: unms
-version: 1.1.0
+version: "1.1.0"
+deprecated: false
+type: application
+appVersion: "13.0.0"
+description: A chart for showing every README-element
+home: "https://github.com/norwoodj/helm-docs/tree/master/example-charts/full-template"
+maintainers:
+  - email: norwood.john.m@gmail.com
+    name: John Norwood
+sources: ["https://github.com/norwoodj/helm-docs/tree/master/example-charts/full-template"]
+kubeVersion: "<=1.18"
+engine: gotpl
