@@ -12,11 +12,11 @@ WORKDIR /home/app/unms
 # Copy UNMS app from offical image since the source code is not published at this time
 COPY --from=unms /home/app/unms /home/app/unms
 
-RUN apt-get update && apt-get install -y git python build-essential libvips-dev libcairo-gobject2 libcap2-bin dumb-init netcat --no-install-recommends
+RUN apt-get update && apt-get install -y git python build-essential libvips-dev libcairo-gobject2 libglib2.0-dev libcap2-bin dumb-init netcat --no-install-recommends
 
 RUN rm -rf node_modules \
     && sed -i 's/"@sentry\/cli": "1.49.0"/"@sentry\/cli": "1.55.2"/g' package.json \
-    && JOBS=$(nproc) npm install --production --no-cache --ignore-engines \
+    && CHILD_CONCURRENCY=$(nproc) npm install --production --no-cache --ignore-engines \
     && mkdir -p -m 777 "$HOME/unms/public/site-images" \
     && mkdir -p -m 777 "$HOME/unms/data/config-backups" \
     && mkdir -p -m 777 "$HOME/unms/data/unms-backups" \
@@ -27,7 +27,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # end ubnt/unms dockerfile #
 
-RUN apt-get autoremove --purge -y build-essential libvips-dev libcairo-gobject2 git python \
+RUN apt-get autoremove --purge -y build-essential libvips-dev libcairo-gobject2 libglib2.0-dev git python \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
