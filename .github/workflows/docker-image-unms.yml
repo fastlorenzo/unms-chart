@@ -8,13 +8,15 @@ on:
     tags:
       - 'v*'
     paths:
-      - 'docker'
+      - 'docker/**'
+      - '.github/workflows/docker-image*'
   pull_request:
     branches:
       - 'master'
       - 'v*'
     paths:
-      - 'docker'
+      - 'docker/**'
+      - '.github/workflows/docker-image*'
 
 jobs:
   docker:
