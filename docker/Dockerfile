@@ -2,6 +2,7 @@ FROM ubnt/unms:1.3.0-dev as unms
 FROM node:10.19.0-buster-slim
 
 LABEL maintainer="docker@bernardi.be"
+LABEL version="1.3.0-dev:1"
 
 # start ubnt/unms dockerfile #
 RUN mkdir -p /home/app/unms
