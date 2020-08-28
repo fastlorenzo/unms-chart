@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y git python build-essential libvips libc
 
 RUN rm -rf node_modules \
     && sed -i 's/"@sentry\/cli": "1.49.0"/"@sentry\/cli": "1.55.2"/g' package.json \
-    && npm install --production --no-cache --ignore-engines \
+    && JOBS=$(nproc) npm install --production --no-cache --ignore-engines \
     && mkdir -p -m 777 "$HOME/unms/public/site-images" \
     && mkdir -p -m 777 "$HOME/unms/data/config-backups" \
     && mkdir -p -m 777 "$HOME/unms/data/unms-backups" \
