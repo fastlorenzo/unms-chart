@@ -12,7 +12,7 @@ WORKDIR /home/app/unms
 # Copy UNMS app from offical image since the source code is not published at this time
 COPY --from=unms /home/app/unms /home/app/unms
 
-RUN apt-get update && apt-get install -y git python build-essential libvips libcairo-gobject2 libcap2-bin
+RUN apt-get update && apt-get install -y git python build-essential libvips42 libcairo-gobject2 libcap2-bin dumb-init netcat
 
 RUN rm -rf node_modules \
     && sed -i 's/"@sentry\/cli": "1.49.0"/"@sentry\/cli": "1.55.2"/g' package.json \
@@ -27,7 +27,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # end ubnt/unms dockerfile #
 
-RUN apt-get autoremove --purge -y build-essential libvips libcairo-gobject2 libcap2-bin git python \
+RUN apt-get autoremove --purge -y build-essential libvips libcairo-gobject2 git python \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
@@ -49,6 +49,6 @@ ENV HOME=/home/app \
 
 EXPOSE 8081 8082
 
-#RUN setcap cap_net_raw=pe /bin/node
+RUN setcap cap_net_raw=pe /bin/node
 
 ENTRYPOINT ["/usr/bin/dumb-init", "docker-entrypoint.sh"]
