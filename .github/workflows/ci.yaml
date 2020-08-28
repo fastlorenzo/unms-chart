@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - 'unms/**'
-  # pull_request:
-  #   paths:
-  #     - 'unms/**'
+    paths:
+      - 'unms/**'
+  pull_request:
+    paths:
+      - 'unms/**'
 
 jobs:
   lint-chart:
