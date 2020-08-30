@@ -23,3 +23,6 @@ dependencies:
   - name: redis
     version: ~10.7.17
     repository: https://charts.bitnami.com/bitnami
+  - name: siridb
+    version: ~0.1.0
+    repository: https://fastlorenzo.github.io/unms-chart

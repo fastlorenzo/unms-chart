@@ -8,5 +8,8 @@ dependencies:
 - name: redis
   repository: https://charts.bitnami.com/bitnami
   version: 10.7.17
-digest: sha256:2bc5432d15e678b76e6415fbcd77b8267ed9b375d807bc54fbc2c43a2fead39d
-generated: "2020-08-29T08:47:20.5322488+02:00"
+- name: siridb
+  repository: https://fastlorenzo.github.io/unms-chart
+  version: 0.1.0
+digest: sha256:a070ae8e33487bfe415f3513c5d58f8c29114bca5afc0b68f27f5253606825c3
+generated: "2020-08-30T20:54:17.8423904+02:00"
