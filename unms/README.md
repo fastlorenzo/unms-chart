@@ -36,4 +36,5 @@ helm repo update
 | redis | object | `{"image":{"repository":"redis","tag":6},"master":{"command":"/usr/local/bin/docker-entrypoint.sh","persistence":{"enabled":false}},"persistence":{"enabled":false},"sentinel":{"image":{"repository":"redis","tag":6}},"slave":{"command":"/usr/local/bin/docker-entrypoint.sh","persistence":{"enabled":false}},"volumePermissions":{"image":{"repository":"redis","tag":6}}}` | Bitnami Redis values to override |
 | replicas | int | `1` | Number of UNMS replicas |
 | resources | object | `{}` | UNMS pods resources |
+| siridb | object | `{}` | SiriDB values to override |
 | updateStrategy | string | `"RollingUpdate"` | UNMS pods update strategy |

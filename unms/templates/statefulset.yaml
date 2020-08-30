@@ -59,6 +59,8 @@ spec:
               key: postgresql-password
         - name: UNMS_RABBITMQ_HOST
           value: "{{ .Release.Name }}-rabbitmq"
+        - name: UNMS_SIRIDB_HOST
+          value: "{{ .Release.Name }}-siridb"
         {{- if .Values.persistence.enabled }}
         volumeMounts:
         - name: "storage"

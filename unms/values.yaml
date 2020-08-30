@@ -133,6 +133,11 @@ redis:
     persistence:
       enabled: false
 
+# siridb -- SiriDB values to override
+siridb:
+  service:
+    port: 9000
+
 # # rbmqImage -- RabitMQ docker image
 # rbmqImage: rabbitmq:3.8-alpine
 # # DBimage -- PostgreSQL docker image
