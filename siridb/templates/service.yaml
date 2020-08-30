@@ -2,14 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "siridb.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "siridb.labels" . | nindent 4 }}
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: {{ .Values.service.port }}
+    name: data
+    targetPort: 9010
   selector:
-    {{- include "siridb.selectorLabels" . | nindent 4 }}
+    {{- include "siridb.selectorLabels" . | nindent 8 }}
