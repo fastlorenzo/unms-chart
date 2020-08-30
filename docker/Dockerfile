@@ -12,7 +12,7 @@ WORKDIR /home/app/unms
 # Copy UNMS app from offical image since the source code is not published at this time
 COPY --from=unms /home/app/unms /home/app/unms
 
-RUN apt-get update && apt-get install -y git python build-essential libvips-dev libcairo-gobject2 libglib2.0-dev libcap2-bin dumb-init netcat postgresql-client --no-install-recommends
+RUN apt-get update && apt-get install -y git python build-essential libvips-dev libcairo-gobject2 libglib2.0-dev libcap2-bin dumb-init netcat postgresql-client redis-tools --no-install-recommends
 
 RUN rm -rf node_modules \
     && sed -i 's/"@sentry\/cli": "1.49.0"/"@sentry\/cli": "1.55.2"/g' package.json \
