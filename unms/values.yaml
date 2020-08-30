@@ -93,6 +93,9 @@ postgresql:
     requests:
       memory: 128Mi
       cpu: "100m"
+  postgresqlDatabase: unms
+  postgresqlUsername: unms
+  existingSecret: test-postgresql
 
 # rabbitmq -- Bitnami RabbitMQ values to override
 rabbitmq:

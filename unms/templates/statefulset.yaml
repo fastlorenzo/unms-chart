@@ -51,7 +51,7 @@ spec:
         - name: UNMS_PG_HOST
           value: "{{ .Release.Name }}-postgresql"
         - name: UNMS_PG_USER
-          value: "postgres"
+          value: "unms"
         - name: UNMS_PG_PASSWORD
           valueFrom:
             secretKeyRef:
