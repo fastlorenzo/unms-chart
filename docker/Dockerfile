@@ -22,7 +22,7 @@ RUN rm -rf node_modules \
     && mkdir -p -m 777 "$HOME/unms/data/unms-backups" \
     && mkdir -p -m 777 "$HOME/unms/data/import"
 
-COPY --from=unms /usr/local/bin/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # end ubnt/unms dockerfile #
@@ -37,6 +37,8 @@ ENV HOME=/home/app \
     WS_PORT=8082 \
     UNMS_RABBITMQ_HOST=unms-rabbitmq \
     UNMS_RABBITMQ_PORT=5672 \
+    UNMS_SIRIDB_HOST=unms-siridb \
+    UNMS_SIRIDB_PORT=9000 \
     UNMS_REDISDB_HOST=unms-redis \
     UNMS_REDISDB_PORT=6379 \
     UNMS_PG_HOST=unms-postgres \
