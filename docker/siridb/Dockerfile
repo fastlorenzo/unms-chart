@@ -21,7 +21,7 @@ COPY --from=0 /tmp/siridb-server/Release/siridb-server /usr/local/bin/
 COPY --from=0 /usr/lib/libcleri* /usr/lib/
 
 RUN sed -i 's/bind_server_address = 127.0.0.1/bind_server_address = 0.0.0.0/g' /etc/siridb/siridb.conf && \
-    sed -i 's/bind_client_address = 127.0.0.1/bind_client_address = 0.0.0.0/g' /etc/siridb/siridb.conf && \
+    sed -i 's/bind_client_address = 127.0.0.1/bind_client_address = 0.0.0.0/g' /etc/siridb/siridb.conf
 
 # Configuration
 VOLUME ["/etc/siridb"] # config
