@@ -1,4 +1,4 @@
-name: docker-image-siridb
+name: Build SiriDB docker image
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: docker-image-unms
+name: Build UNMS docker image
 
 on:
   push:
