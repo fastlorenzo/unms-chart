@@ -13,3 +13,13 @@ sources:
   - "https://github.com/fastlorenzo/unms-chart"
 kubeVersion: "<=1.18"
 engine: gotpl
+dependencies:
+  - name: postgresql
+    version: ~9.3.3
+    repository: https://charts.bitnami.com/bitnami
+  - name: rabbitmq
+    version: ~7.6.4
+    repository: https://charts.bitnami.com/bitnami
+  - name: redis
+    version: ~10.7.17
+    repository: https://charts.bitnami.com/bitnami

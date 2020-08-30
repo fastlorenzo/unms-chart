@@ -1,67 +1,153 @@
-# nameOverride -- Override chart name
+
+# nameOverride -- String to partially override unms.fullname template (will maintain the release name)
 nameOverride: ""
 
-unms:
-  # unms.podAnnotations -- Annotations for UNMS pods
-  podAnnotations: {}
-    # iam.amazonaws.com/role: unms
-  # unms.image -- UNMS docker image name
-  image: ubnt/unms
-  # unms.imageTag -- UNMS docker image tag
-  imageTag: "0.10.4"
-  # unms.imagePullPolicy -- UNMS docker image pull policy
-  imagePullPolicy: "IfNotPresent"
-  # unms.podManagementPolicy -- UNMS pods management policy
-  podManagementPolicy: "Parallel"
-  # unms.updateStrategy -- UNMS pods update strategy
-  updateStrategy: "RollingUpdate"
-  # unms.labels -- UNMS pod extra labels
-  labels: {}
-  # unms.replicas -- Number of UNMS replicas
-  replicas: 1
-  # unms.resources -- UNMS pods resources
-  resources: {}
-    # requests:
-    #   cpu: 0.1
-    #   memory: 100
-    # limits:
-    #   cpu: "1000m"
-    #   memory: "2Gi"
-  persistence:
-    # unms.persistence.enabled -- Persist UNMS data
-    enabled: true
-    annotations: {}
-    # unms.persistence.existingClaim -- Name of existing PVC for UNMS data
-    existingClaim: "unms-storage-nfs"
-    # unms.persistence.accessModes -- UNMS storage access modes
-    accessModes:
-      - ReadWriteOnce
-    # unms.persistence.size -- UNMS storage size
-    size: 10Gi
-    # unms.persistence.storageClass -- UNMS PV storage class name, keep empty to use default.
-    # Not used if `existingClaim` is set.
-    storageClass: ""
+# String to fully override unms.fullname template
+fullnameOverride: ""
 
-# rbmqImage -- RabitMQ docker image
-rbmqImage: rabbitmq:latest
-# DBimage -- PostgreSQL docker image
-DBimage: postgres:latest
-# redisImage -- Redis docker image
-redisImage: redis:latest
-
-# vhost -- Hostname used to reach UNMS
-vhost: unms.domain.tld
-# clusterDomain -- K8S cluster domain name
+# podAnnotations -- Annotations for UNMS pods
+podAnnotations: {}
+  # iam.amazonaws.com/role: unms
+# image -- UNMS docker image name (use ubnt/unms for amd64, fastlorenzo/unms for arm/arm64)
+image: fastlorenzo/unms
+# imageTag -- UNMS docker image tag
+imageTag: "latest"
+# imagePullPolicy -- UNMS docker image pull policy
+imagePullPolicy: "Always"
+# podManagementPolicy -- UNMS pods management policy
+podManagementPolicy: "Parallel"
+# updateStrategy -- UNMS pods update strategy
+updateStrategy: "RollingUpdate"
+# labels -- UNMS pod extra labels
+labels: {}
+# replicas -- Number of UNMS replicas
+replicas: 1
+# clusterDomain -- Kubernetes Cluster Domain
 clusterDomain: cluster.local
+# resources -- UNMS pods resources
+resources: {}
+  # requests:
+  #   cpu: 0.1
+  #   memory: 100
+  # limits:
+  #   cpu: "1000m"
+  #   memory: "2Gi"
+persistence:
+  # persistence.enabled -- Persist UNMS data
+  enabled: true
+  annotations: {}
+  # persistence.existingClaim -- Name of existing PVC for UNMS data
+  existingClaim: "unms-storage-nfs"
+  # persistence.accessModes -- UNMS storage access modes
+  accessModes:
+    - ReadWriteOnce
+  # persistence.size -- UNMS storage size
+  size: 10Gi
+  # persistence.storageClass -- UNMS PV storage class name, keep empty to use default.
+  # Not used if `existingClaim` is set.
+  storageClass: ""
 
-# volumeSize -- UNMS storage volume size
-volumeSize: 2Gi
-# DBSize -- PostgreSQL storage volume size
-DBSize: 10Gi
+ingress:
+  # ingress.enabled -- Enable Ingress controller
+  enabled: true
+  # ingress.annotations -- Ingress annotations
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "step-issuer"
+    cert-manager.io/acme-challenge-type: http01
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  # ingress.hosts -- Ingress hosts configuration
+  hosts:
+    - host: unms.bernardi.local
+      paths:
+        - /
+  # ingress.tls -- Ingress TLS configuration
+  tls:
+    - hosts:
+      - unms.bernardi.local
+      secretName: unms-bernardi-local-tls
 
-# postgresDBuser -- PostgreSQL DB username
-postgresDBuser: unms
-# postgresDBname -- PostgreSQL DB name
-postgresDBname: unms
-# postgresDBpassword -- PostgreSQL DB password
-postgresDBpassword: PassWord
+# postgresql -- Bitnami PostgreSQL values to override (source)[https://github.com/helm/charts/issues/19132]
+postgresql:
+  image:
+    repository: postgres
+    tag: 9.6
+  volumePermissions:
+    enabled: true
+    image:
+      repository: postgres
+      tag: 9.6
+  persistence:
+    mountPath: /data
+    existingClaim: "data-test-postgresql-0"
+    size: 20Gi
+  postgresqlDataDir: /data/pgdata
+  securityContext:
+    fsGroup: 11001
+    runAsUser: 10001
+  livenessProbe:
+    initialDelaySeconds: 20
+  readinessProbe:
+    initialDelaySeconds: 20
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: "100m"
+
+# rabbitmq -- Bitnami RabbitMQ values to override
+rabbitmq:
+  image:
+    repository: rabbitmq
+    tag: 3.8-alpine
+  volumePermissions:
+    image:
+      repository: rabbitmq
+      tag: 3.8-alpine
+  persistence:
+    enabled: false
+
+# redis -- Bitnami Redis values to override
+redis:
+  image:
+    repository: redis
+    tag: 6.0
+  sentinel:
+    image:
+      repository: redis
+      tag: 6.0
+  volumePermissions:
+    image:
+      repository: redis
+      tag: 6.0
+  persistence:
+    enabled: false
+  master:
+    command: "/usr/local/bin/docker-entrypoint.sh"
+    persistence:
+      enabled: false
+  slave:
+    command: "/usr/local/bin/docker-entrypoint.sh"
+    persistence:
+      enabled: false
+
+# # rbmqImage -- RabitMQ docker image
+# rbmqImage: rabbitmq:3.8-alpine
+# # DBimage -- PostgreSQL docker image
+# DBimage: postgres:9.6
+# # redisImage -- Redis docker image
+# redisImage: redis:6.0
+#
+# # vhost -- Hostname used to reach UNMS
+# vhost: unms.domain.tld
+#
+# # volumeSize -- UNMS storage volume size
+# volumeSize: 2Gi
+# # DBSize -- PostgreSQL storage volume size
+# DBSize: 10Gi
+#
+# # postgresDBuser -- PostgreSQL DB username
+# postgresDBuser: unms
+# # postgresDBname -- PostgreSQL DB name
+# postgresDBname: unms
+# # postgresDBpassword -- PostgreSQL DB password
+# postgresDBpassword: PassWord
