@@ -9,14 +9,14 @@ on:
       - 'v*'
     paths:
       - 'docker/unms/**'
-      - '.github/workflows/docker-image*'
+      - '.github/workflows/docker-image-unms*'
   pull_request:
     branches:
       - 'master'
       - 'v*'
     paths:
       - 'docker/unms/**'
-      - '.github/workflows/docker-image*'
+      - '.github/workflows/docker-image-unms*'
 
 jobs:
   docker:

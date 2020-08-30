@@ -6,10 +6,12 @@ on:
       - master
     paths:
       - 'unms/**'
+      - 'siridb/**'
       - '.github/**'
   pull_request:
     paths:
       - 'unms/**'
+      - 'siridb/**'
       - '.github/**'
 
 jobs:

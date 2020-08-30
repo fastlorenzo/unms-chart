@@ -9,14 +9,14 @@ on:
       - 'v*'
     paths:
       - 'docker/siridb/**'
-      - '.github/workflows/docker-image*'
+      - '.github/workflows/docker-image-siridb*'
   pull_request:
     branches:
       - 'master'
       - 'v*'
     paths:
       - 'docker/siridb/**'
-      - '.github/workflows/docker-image*'
+      - '.github/workflows/docker-image-siridb*'
 
 jobs:
   docker:

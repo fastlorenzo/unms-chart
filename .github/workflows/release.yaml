@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'unms/**'
+      - 'siridb/**'
       - '.github/**'
 
 jobs:
@@ -21,4 +22,5 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@master
         env:
-          CR_TOKEN: '${{ secrets.CR_TOKEN }}'
+          token: '${{ secrets.CR_TOKEN }}'
+          charts_dir: .
