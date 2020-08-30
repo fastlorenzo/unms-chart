@@ -1,4 +1,4 @@
-name: docker-image-unms
+name: docker-image-siridb
 
 on:
   push:
