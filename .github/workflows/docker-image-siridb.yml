@@ -8,14 +8,14 @@ on:
     tags:
       - 'v*'
     paths:
-      - 'docker/unms/**'
+      - 'docker/siridb/**'
       - '.github/workflows/docker-image*'
   pull_request:
     branches:
       - 'master'
       - 'v*'
     paths:
-      - 'docker/unms/**'
+      - 'docker/siridb/**'
       - '.github/workflows/docker-image*'
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=fastlorenzo/unms
+          DOCKER_IMAGE=fastlorenzo/siridb-server
           DOCKER_PLATFORMS=linux/amd64,linux/arm/v7
           VERSION=latest
           if [[ $GITHUB_REF == refs/tags/* ]]; then
@@ -45,7 +45,7 @@ jobs:
             --build-arg VCS_REF=${GITHUB_SHA::8} \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
-            ${TAGS} --file docker/unms/Dockerfile docker/unms
+            ${TAGS} --file docker/siridb/Dockerfile docker/siridb
       - name: Set up Docker Buildx
         uses: crazy-max/ghaction-docker-buildx@v3.3.0
       - name: Cache Docker layers
