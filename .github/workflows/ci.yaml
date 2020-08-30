@@ -6,9 +6,11 @@ on:
       - master
     paths:
       - 'unms/**'
+      - '.github/**'
   pull_request:
     paths:
       - 'unms/**'
+      - '.github/**'
 
 jobs:
   lint-chart:
