@@ -11,8 +11,9 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  - port: {{ .Values.service.port }}
-    name: data
-    targetPort: 9010
+  - port: 9000
+    name: client
+  - port: 9010
+    name: backend
   selector:
     {{- include "siridb.selectorLabels" . | nindent 8 }}
