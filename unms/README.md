@@ -33,8 +33,8 @@ helm repo update
 | podManagementPolicy | string | `"Parallel"` | UNMS pods management policy |
 | postgresql | object | `{"existingSecret":"test-postgresql","image":{"repository":"postgres","tag":9.6},"livenessProbe":{"initialDelaySeconds":20},"persistence":{"existingClaim":"data-test-postgresql-0","mountPath":"/data","size":"20Gi"},"postgresqlDataDir":"/data/pgdata","postgresqlDatabase":"unms","postgresqlUsername":"unms","readinessProbe":{"initialDelaySeconds":20},"resources":{"requests":{"cpu":"100m","memory":"128Mi"}},"securityContext":{"fsGroup":11001,"runAsUser":10001},"volumePermissions":{"enabled":true,"image":{"repository":"postgres","tag":9.6}}}` | Bitnami PostgreSQL values to override (source)[https://github.com/helm/charts/issues/19132] |
 | rabbitmq | object | `{"image":{"repository":"rabbitmq","tag":"3.8-alpine"},"persistence":{"enabled":false},"volumePermissions":{"image":{"repository":"rabbitmq","tag":"3.8-alpine"}}}` | Bitnami RabbitMQ values to override |
-| redis | object | `{"image":{"repository":"redis","tag":6},"master":{"command":"/usr/local/bin/docker-entrypoint.sh","persistence":{"enabled":false}},"persistence":{"enabled":false},"sentinel":{"image":{"repository":"redis","tag":6}},"slave":{"command":"/usr/local/bin/docker-entrypoint.sh","persistence":{"enabled":false}},"volumePermissions":{"image":{"repository":"redis","tag":6}}}` | Bitnami Redis values to override |
+| redis | object | `{"image":{"repository":"redis","tag":6},"master":{"command":"/usr/local/bin/docker-entrypoint.sh","persistence":{"enabled":false}},"persistence":{"enabled":false},"sentinel":{"image":{"repository":"redis","tag":6}},"slave":{"command":"/usr/local/bin/docker-entrypoint.sh","persistence":{"enabled":false}},"usePassword":false,"volumePermissions":{"image":{"repository":"redis","tag":6}}}` | Bitnami Redis values to override |
 | replicas | int | `1` | Number of UNMS replicas |
 | resources | object | `{}` | UNMS pods resources |
-| siridb | object | `{}` | SiriDB values to override |
+| siridb | object | `{"service":{"port":9000}}` | SiriDB values to override |
 | updateStrategy | string | `"RollingUpdate"` | UNMS pods update strategy |

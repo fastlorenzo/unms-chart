@@ -67,7 +67,20 @@ spec:
           mountPath: /home/app/unms/data
         {{- end }}
         resources:
-{{ toYaml .Values.resources | indent 10 }}
+          {{ toYaml .Values.resources | indent 10 }}
+      {{- if .Values.persistence.enabled }}
+      initContainers:
+        - name: init
+          image: busybox:1.32
+          imagePullPolicy: IfNotPresent
+          command:
+            - 'sh'
+            - '-c'
+            - 'mkdir -p -m 777 /data/config-backups; mkdir -p -m 777 /data/unms-backups; mkdir -p -m 777 /data/import'
+          volumeMounts:
+          - name: "storage"
+            mountPath: /data
+      {{- end }}
       {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:

@@ -132,6 +132,7 @@ redis:
     command: "/usr/local/bin/docker-entrypoint.sh"
     persistence:
       enabled: false
+  usePassword: false
 
 # siridb -- SiriDB values to override
 siridb:
