@@ -1,4 +1,4 @@
-name: Release UNMS chart
+name: Release UNMS CRM chart
 
 on:
   push:
