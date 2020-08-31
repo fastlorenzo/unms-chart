@@ -36,7 +36,7 @@ spec:
         name: "{{ template "unms-crm.fullname" . }}"
         env:
         - name: POSTGRES_USER
-          value: unms
+          value: ucrm
         - name: POSTGRES_DB
           value: unms
         - name: POSTGRES_PASSWORD
@@ -65,9 +65,15 @@ spec:
         - name: UNMS_PORT
           value: "8081"
         - name: UNMS_TOKEN
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-unms"
+              key: unms-token
         - name: UNMS_VERSION
-          value: ""
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-unms"
+              key: unms-version
         args: ["server_with_migrate"]
         {{- if .Values.persistence.enabled }}
         volumeMounts:
