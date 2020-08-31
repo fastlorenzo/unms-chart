@@ -6,11 +6,13 @@ on:
       - master
     paths:
       - 'unms/**'
+      - 'unms-crm/**'
       - 'siridb/**'
       - '.github/**'
   pull_request:
     paths:
       - 'unms/**'
+      - 'unms-crm/**'
       - 'siridb/**'
       - '.github/**'
 
