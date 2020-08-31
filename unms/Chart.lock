@@ -10,9 +10,9 @@ dependencies:
   version: 10.7.17
 - name: siridb
   repository: https://fastlorenzo.github.io/unms-chart
-  version: 0.1.0
+  version: 0.1.3
 - name: unms-crm
   repository: https://fastlorenzo.github.io/unms-chart
   version: 0.1.2
-digest: sha256:82789a05d9f191d46e7d7121bcb3dac7656b647a438fcdcbac834898746ea2be
-generated: "2020-08-31T14:46:26.0139706+02:00"
+digest: sha256:fca660f6121610a4ccaa1a023cf109a9055c8985e26650741933c247acd5e437
+generated: "2020-08-31T14:51:19.6974228+02:00"
