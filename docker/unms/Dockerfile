@@ -54,3 +54,4 @@ EXPOSE 8081 8082
 RUN setcap cap_net_raw=pe /usr/local/bin/node
 
 ENTRYPOINT ["/usr/bin/dumb-init", "docker-entrypoint.sh"]
+CMD ["/bin/sh"]

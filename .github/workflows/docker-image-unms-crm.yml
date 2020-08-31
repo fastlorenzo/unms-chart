@@ -1,4 +1,4 @@
-name: Build UNMS docker image
+name: Build UNMS CRM docker image
 
 on:
   push:
@@ -8,15 +8,15 @@ on:
     tags:
       - 'v*'
     paths:
-      - 'docker/unms/**'
-      - '.github/workflows/docker-image-unms.yaml'
+      - 'docker/unms-crm/**'
+      - '.github/workflows/docker-image-unms-crm.yaml'
   pull_request:
     branches:
       - 'master'
       - 'v*'
     paths:
-      - 'docker/unms/**'
-      - '.github/workflows/docker-image-unms.yaml'
+      - 'docker/unms-crm/**'
+      - '.github/workflows/docker-image-unms-crm.yaml'
 
 jobs:
   docker:
@@ -27,8 +27,8 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=fastlorenzo/unms
-          DOCKER_PLATFORMS=linux/amd64,linux/arm/v7
+          DOCKER_IMAGE=fastlorenzo/unms-crm
+          DOCKER_PLATFORMS=linux/amd64,linux/arm/v7,linux/arm64
           VERSION=latest
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
