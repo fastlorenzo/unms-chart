@@ -1,9 +1,9 @@
 apiVersion: v3
 name: unms
-version: "1.1.0"
+version: 1.1.1
 deprecated: false
 type: application
-appVersion: "13.0.0"
+appVersion: 3.3.0-dev
 description: Helm chart to deploy UNMS (works on arm as well)
 home: "https://github.com/fastlorenzo/unms-chart"
 maintainers:
