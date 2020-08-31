@@ -47,7 +47,7 @@ spec:
         - name: POSTGRES_HOST
           value: "{{ .Release.Name }}-postgresql"
         - name: POSTGRES_SCHEMA
-          value: "unms"
+          value: "ucrm"
         - name: UNMS_POSTGRES_SCHEMA
           value: "unms"
         - name: RABBITMQ_HOST
@@ -68,6 +68,7 @@ spec:
           value: ""
         - name: UNMS_VERSION
           value: ""
+        args: ["server_with_migrate"]
         {{- if .Values.persistence.enabled }}
         volumeMounts:
         - name: "storage"
