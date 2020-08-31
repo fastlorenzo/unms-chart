@@ -111,6 +111,39 @@ entries:
     version: 1.1.0
   - apiVersion: v3
     appVersion: 3.3.0-dev
+    created: "2020-08-31T17:09:46.494316289Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~9.3.3
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: ~7.6.4
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~10.7.17
+    - name: siridb
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.0
+    - name: unms-crm
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.2
+    description: Helm chart to deploy UNMS (works on arm as well)
+    digest: db560595d7ecefc80adad26af1f9d8f03adb2a8c71416eadef17070e841d463c
+    home: https://github.com/fastlorenzo/unms-chart
+    kubeVersion: <=1.18
+    maintainers:
+    - email: git@bernardi.be
+      name: Lorenzo Bernardi
+    name: unms
+    sources:
+    - https://github.com/fastlorenzo/unms-chart
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-0.1.4/unms-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v3
+    appVersion: 3.3.0-dev
     created: "2020-08-31T12:52:49.260663486Z"
     dependencies:
     - name: postgresql
