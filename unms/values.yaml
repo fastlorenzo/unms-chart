@@ -96,6 +96,7 @@ postgresql:
   postgresqlDatabase: unms
   postgresqlUsername: unms
   existingSecret: test-postgresql
+  initdbScriptsConfigMap: test-unms-initdb
 
 # rabbitmq -- Bitnami RabbitMQ values to override
 rabbitmq:
@@ -138,25 +139,3 @@ redis:
 siridb:
   service:
     port: 9000
-
-# # rbmqImage -- RabitMQ docker image
-# rbmqImage: rabbitmq:3.8-alpine
-# # DBimage -- PostgreSQL docker image
-# DBimage: postgres:9.6
-# # redisImage -- Redis docker image
-# redisImage: redis:6.0
-#
-# # vhost -- Hostname used to reach UNMS
-# vhost: unms.domain.tld
-#
-# # volumeSize -- UNMS storage volume size
-# volumeSize: 2Gi
-# # DBSize -- PostgreSQL storage volume size
-# DBSize: 10Gi
-#
-# # postgresDBuser -- PostgreSQL DB username
-# postgresDBuser: unms
-# # postgresDBname -- PostgreSQL DB name
-# postgresDBname: unms
-# # postgresDBpassword -- PostgreSQL DB password
-# postgresDBpassword: PassWord

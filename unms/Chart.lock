@@ -1,7 +1,7 @@
 dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 9.3.3
+  version: 9.3.4
 - name: rabbitmq
   repository: https://charts.bitnami.com/bitnami
   version: 7.6.4
@@ -13,6 +13,6 @@ dependencies:
   version: 0.1.3
 - name: unms-crm
   repository: https://fastlorenzo.github.io/unms-chart
-  version: 0.1.3
-digest: sha256:0be24c513147f454dbebe942fdab0ef792557ea3e203ed7015362e5fed107743
-generated: "2020-08-31T19:08:21.1953011+02:00"
+  version: 0.1.4
+digest: sha256:34eeb261a24c1edc77143a799d7d440b34fb29ac32363c92be830c806e6f9449
+generated: "2020-09-01T20:41:57.8975288+02:00"

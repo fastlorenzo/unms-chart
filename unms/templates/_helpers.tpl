@@ -49,3 +49,21 @@ Selector labels
 app.kubernetes.io/name: {{ include "unms.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
+
+{{/*
+Return UNMS/UCRM token
+*/}}
+{{- define "unms.token" -}}
+{{- if .Values.unmsToken }}
+    {{- .Values.unmsToken -}}
+{{- else -}}
+    {{- randAlphaNum 32 -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return UNMS app version
+*/}}
+{{- define "unms.version" -}}
+{{ .Chart.AppVersion }}
+{{- end -}}

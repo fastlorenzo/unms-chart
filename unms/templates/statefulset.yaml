@@ -61,6 +61,15 @@ spec:
           value: "{{ .Release.Name }}-rabbitmq"
         - name: UNMS_SIRIDB_HOST
           value: "{{ .Release.Name }}-siridb"
+        - name: UCRM_HOST
+          value: "{{ .Release.Name }}-ucrm"
+        - name: UCRM_PORT
+          value: "80"
+        - name: UNMS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-unms"
+              key: unms-token
         {{- if .Values.persistence.enabled }}
         volumeMounts:
         - name: "storage"
