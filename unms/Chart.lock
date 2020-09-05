@@ -4,15 +4,15 @@ dependencies:
   version: 9.3.4
 - name: rabbitmq
   repository: https://charts.bitnami.com/bitnami
-  version: 7.6.4
+  version: 7.6.5
 - name: redis
   repository: https://charts.bitnami.com/bitnami
   version: 10.7.17
 - name: siridb
   repository: https://fastlorenzo.github.io/unms-chart
-  version: 0.1.3
+  version: 0.1.4
 - name: unms-crm
   repository: https://fastlorenzo.github.io/unms-chart
   version: 0.1.4
-digest: sha256:34eeb261a24c1edc77143a799d7d440b34fb29ac32363c92be830c806e6f9449
-generated: "2020-09-01T20:41:57.8975288+02:00"
+digest: sha256:35f6710c39dc73013fd0ee5483374ca896fdb3eee7a1dff4f1793704671dc228
+generated: "2020-09-05T08:36:49.3837172+02:00"
