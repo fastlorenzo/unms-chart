@@ -3,6 +3,16 @@ entries:
   siridb:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2020-09-05T06:33:47.16669562Z"
+    description: SiriDB helm chart
+    digest: 001b9f6894f31c50e318c6f8eb1667da557926d0ea423249e950368255c1cff4
+    name: siridb
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/siridb-0.1.4/siridb-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2020-08-31T12:50:34.916945327Z"
     description: SiriDB helm chart
     digest: 69bd46b220f260e49f651cd43f921df1703168c508e220e92c23de6f0bfbbe02
@@ -109,6 +119,39 @@ entries:
     urls:
     - https://github.com/fastlorenzo/unms-chart/releases/download/unms-1.1.0/unms-1.1.0.tgz
     version: 1.1.0
+  - apiVersion: v3
+    appVersion: 3.3.0-dev
+    created: "2020-09-05T06:33:47.25516061Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~9.3.3
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: ~7.6.4
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~10.7.17
+    - name: siridb
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.0
+    - name: unms-crm
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.2
+    description: Helm chart to deploy UNMS (works on arm as well)
+    digest: f3a7c5209ca7c4e2db041efa5bffac75945acee75aad116e9f2888e60d18c519
+    home: https://github.com/fastlorenzo/unms-chart
+    kubeVersion: <=1.18
+    maintainers:
+    - email: git@bernardi.be
+      name: Lorenzo Bernardi
+    name: unms
+    sources:
+    - https://github.com/fastlorenzo/unms-chart
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-0.1.6/unms-0.1.6.tgz
+    version: 0.1.6
   - apiVersion: v3
     appVersion: 3.3.0-dev
     created: "2020-08-31T17:09:46.494316289Z"
