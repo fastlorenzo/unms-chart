@@ -286,6 +286,16 @@ entries:
     version: 0.1.3
   unms-crm:
   - apiVersion: v2
+    appVersion: 3.2.7
+    created: "2020-09-06T19:42:54.220594139Z"
+    description: UNMS CRM helm chart
+    digest: 3b160245d7fdcf87186dbe92d61ee9e5100415961bac83684d2cf03c68bfaa03
+    name: unms-crm
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-crm-0.1.5/unms-crm-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     appVersion: 3.3.0-dev
     created: "2020-08-31T18:54:17.800069323Z"
     description: UNMS CRM helm chart
