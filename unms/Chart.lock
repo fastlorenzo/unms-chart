@@ -16,6 +16,6 @@ dependencies:
   version: 0.1.5
 - name: unms-nginx
   repository: https://fastlorenzo.github.io/unms-chart
-  version: 0.1.1
-digest: sha256:9338e238cc38804bed98430ae4b7b2df6b42f65ec093ef78e894a66d018ce40d
-generated: "2020-09-06T22:22:02.4535882+02:00"
+  version: 0.1.2
+digest: sha256:10585dd2ea6d2dc8cd4dfb718caca6059b26387864b13e3c92416bc14cbcded4
+generated: "2020-09-06T22:31:31.3417487+02:00"
