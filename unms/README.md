@@ -18,7 +18,7 @@ helm repo update
 | imagePullPolicy | string | `"Always"` | UNMS docker image pull policy |
 | imageTag | string | `"latest"` | UNMS docker image tag |
 | ingress.annotations | object | `{"cert-manager.io/acme-challenge-type":"http01","cert-manager.io/cluster-issuer":"step-issuer","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/backend-protocol":"HTTPS"}` | Ingress annotations |
-| ingress.enabled | bool | `true` | Enable Ingress controller |
+| ingress.enabled | bool | `false` | Enable Ingress controller |
 | ingress.hosts | list | `[{"host":"unms.bernardi.local","paths":["/"]}]` | Ingress hosts configuration |
 | ingress.tls | list | `[{"hosts":["unms.bernardi.local"],"secretName":"unms-bernardi-local-tls"}]` | Ingress TLS configuration |
 | labels | object | `{}` | UNMS pod extra labels |
@@ -39,5 +39,14 @@ helm repo update
 | replicas | int | `1` | Number of UNMS replicas |
 | resources | object | `{}` | UNMS pods resources |
 | siridb | object | `{"service":{"port":9000}}` | SiriDB values to override |
+| unms-nginx.ingress.annotations."cert-manager.io/acme-challenge-type" | string | `"http01"` |  |
+| unms-nginx.ingress.annotations."cert-manager.io/cluster-issuer" | string | `"step-issuer"` |  |
+| unms-nginx.ingress.annotations."kubernetes.io/ingress.class" | string | `"nginx"` |  |
+| unms-nginx.ingress.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"HTTPS"` |  |
+| unms-nginx.ingress.enabled | bool | `true` |  |
+| unms-nginx.ingress.hosts[0].host | string | `"unms.bernardi.local"` |  |
+| unms-nginx.ingress.hosts[0].paths[0] | string | `"/"` |  |
+| unms-nginx.ingress.tls[0].hosts[0] | string | `"unms.bernardi.local"` |  |
+| unms-nginx.ingress.tls[0].secretName | string | `"unms-bernardi-local-tls"` |  |
 | unmsUserId | int | `10001` | UNMS User ID |
 | updateStrategy | string | `"RollingUpdate"` | UNMS pods update strategy |
