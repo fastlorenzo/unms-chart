@@ -22,20 +22,24 @@ helm repo update
 | image.pullPolicy | string | `"Always"` |  |
 | image.repository | string | `"padhihomelab/unms"` |  |
 | image.tag | string | `"nginx"` |  |
-| ingress.annotations | object | `{}` |  |
-| ingress.enabled | bool | `false` |  |
-| ingress.hosts[0].host | string | `"chart-example.local"` |  |
-| ingress.hosts[0].paths | list | `[]` |  |
-| ingress.tls | list | `[]` |  |
+| ingress.annotations | object | `{"cert-manager.io/acme-challenge-type":"http01","cert-manager.io/cluster-issuer":"step-issuer","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/backend-protocol":"HTTPS"}` | Ingress annotations |
+| ingress.enabled | bool | `true` | Enable Ingress controller |
+| ingress.hosts | list | `[{"host":"unms.bernardi.local","paths":["/"]}]` | Ingress hosts configuration |
+| ingress.tls | list | `[{"hosts":["unms.bernardi.local"],"secretName":"unms-bernardi-local-tls"}]` | Ingress TLS configuration |
 | labels | object | `{}` | unms-nginx pod extra labels |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
-| persistence.accessModes | list | `["ReadWriteOnce"]` | UNMS storage access modes |
-| persistence.annotations | object | `{}` |  |
+| persistence.cert.accessModes | list | `["ReadWriteOnce"]` | UNMS storage access modes |
+| persistence.cert.annotations | object | `{}` |  |
+| persistence.cert.existingClaim | string | `"unms-storage-cert-nfs"` | Name of existing PVC for UNMS cert |
+| persistence.cert.size | string | `"10Gi"` | UNMS storage size |
+| persistence.cert.storageClass | string | `""` | UNMS PV storage class name, keep empty to use default. Not used if `existingClaim` is set. |
 | persistence.enabled | bool | `false` | Persist UNMS data |
-| persistence.existingClaim | string | `"unms-unms-nginx-nfs"` | Name of existing PVC for UNMS data |
-| persistence.size | string | `"10Gi"` | UNMS storage size |
-| persistence.storageClass | string | `""` | UNMS PV storage class name, keep empty to use default. Not used if `existingClaim` is set. |
+| persistence.firmwares.accessModes | list | `["ReadWriteOnce"]` | UNMS storage access modes |
+| persistence.firmwares.annotations | object | `{}` |  |
+| persistence.firmwares.existingClaim | string | `"unms-storage-firmwares-nfs"` | Name of existing PVC for UNMS firmwares |
+| persistence.firmwares.size | string | `"10Gi"` | UNMS storage size |
+| persistence.firmwares.storageClass | string | `""` | UNMS PV storage class name, keep empty to use default. Not used if `existingClaim` is set. |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `1` |  |
