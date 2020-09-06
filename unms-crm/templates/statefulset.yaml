@@ -35,35 +35,72 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: "{{ template "unms-crm.fullname" . }}"
         env:
+        - name: POSTGRES_HOST
+          value: "{{ .Release.Name }}-postgresql"
+        - name: POSTGRES_PORT
+          value: "5432"
         - name: POSTGRES_USER
           value: ucrm
-        - name: POSTGRES_DB
-          value: unms
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: "{{ .Release.Name }}-postgresql"
               key: postgresql-password
-        - name: POSTGRES_HOST
-          value: "{{ .Release.Name }}-postgresql"
+        - name: POSTGRES_DB
+          value: unms
         - name: POSTGRES_SCHEMA
           value: "ucrm"
         - name: UNMS_POSTGRES_SCHEMA
           value: "unms"
+        - name: MAILER_HOST
+          value: "127.0.0.1"
+        - name: MAILER_USERNAME
+          value: "unms"
+        - name: MAILER_PASSWORD
+          value: "unms"
+        - name: MAILER_AUTH_MODE
+          value: "null"
+        - name: MAILER_ENCRYPTION
+          value: "null"
+        - name: MAILER_PORT
+          value: "null"
+        - name: MAILER_TRANSPORT
+          value: "smtp"
         - name: RABBITMQ_HOST
           value: "{{ .Release.Name }}-rabbitmq"
+        - name: RABBITMQ_PORT
+          value: "5672"
         - name: RABBITMQ_USER
           value: "guest"
         - name: RABBITMQ_PASSWORD
           value: "guest"
+        - name: NETFLOW_HOST
+          value: "0.0.0.0"
+        - name: NETFLOW_PORT
+          value: "2055"
         - name: SECRET
-          value: "SecretToGenerate!1"
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-unms"
+              key: unms-token
+        - name: SYMFONY_ENV
+          value: "prod"
         - name: FORCE_HTTPS
-          value: "0"
+          value: "1"
+        - name: TRUSTED_PROXIES
+          value: "all"
+        - name: UCRM_USERNAME
+          value: "unms"
+        - name: UCRM_PASSWORD
+          value: "unms"
+        - name: UCRM_DISK_USAGE_DIRECTORY
+          value: "/"
+        - name: UAS_INSTALLATION
+          value: ""
         - name: UNMS_HOST
           value: "{{ .Release.Name }}-unms"
         - name: UNMS_PORT
-          value: "8081"
+          value: "443"
         - name: UNMS_TOKEN
           valueFrom:
             secretKeyRef:
@@ -74,6 +111,36 @@ spec:
             secretKeyRef:
               name: "{{ .Release.Name }}-unms"
               key: unms-version
+        - name: SUSPEND_PORT
+          value: "81"
+        - name: CLOUD
+          value: "0"
+        - name: CLOUD_SMTP_PORT
+          value: "null"
+        - name: CLOUD_SMTP_USERNAME
+          value: "unms"
+        - name: CLOUD_SMTP_PASSWORD
+          value: "unms"
+        - name: CLOUD_SMTP_HOSTNAME
+          value: "127.0.0.1"
+        - name: CLOUD_SMTP_TLS_ALLOW_UNAUTHORIZED
+          value: "null"
+        - name: CLOUD_SMTP_SECURITY_MODE
+          value: "null"
+        - name: CLOUD_MAPS_API_KEY
+          value: "null"
+        - name: PUBLIC_HTTPS_PORT
+          value: "443"
+        - name: CLOUD_STRIPE_CONNECT_ONBOARDING_URL
+          value: ""
+        - name: CLOUD_STRIPE_CONNECT_PROXY_SECRET_KEY
+          value: ""
+        - name: CLOUD_STRIPE_CONNECT_PROXY_URL
+          value: ""
+        - name: CLOUD_STRIPE_CONNECT_PUBLISHABLE_KEY
+          value: ""
+        - name: "UNMS_BASE_URL"
+          value: "/v2.1"
         args: ["server_with_migrate"]
         {{- if .Values.persistence.enabled }}
         volumeMounts:
@@ -81,15 +148,14 @@ spec:
           mountPath: /data
         {{- end }}
         resources:
-{{ toYaml .Values.resources | indent 10 }}
+          {{ toYaml .Values.resources | indent 10 }}
       {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
       name: "storage"
       labels:
-        app.kubernetes.io/name: "storage"
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "unms-crm.labels" . | nindent 8 }}
+        {{- include "unms-crm.selectorLabels" . | nindent 8 }}
     spec:
       accessModes:
       {{- range .Values.persistence.accessModes }}
