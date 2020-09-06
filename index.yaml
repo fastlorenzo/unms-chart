@@ -32,6 +32,42 @@ entries:
     - https://github.com/fastlorenzo/unms-chart/releases/download/siridb-0.1.0/siridb-0.1.0.tgz
     version: 0.1.0
   unms:
+  - apiVersion: v2
+    appVersion: 1.2.6
+    created: "2020-09-06T20:31:03.411372992Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~9.3.3
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: ~7.6.4
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~10.7.17
+    - name: siridb
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.4
+    - name: unms-crm
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.2
+    - name: unms-nginx
+      repository: https://fastlorenzo.github.io/unms-chart
+      version: ~0.1.0
+    description: Helm chart to deploy UNMS (works on arm as well)
+    digest: bfd49c9f07bf4fbc84a160317020a5d7af69e27472938a4877cb01aa0cf8a17a
+    home: https://github.com/fastlorenzo/unms-chart
+    kubeVersion: <=1.18
+    maintainers:
+    - email: git@bernardi.be
+      name: Lorenzo Bernardi
+    name: unms
+    sources:
+    - https://github.com/fastlorenzo/unms-chart
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-1.1.10/unms-1.1.10.tgz
+    version: 1.1.10
   - apiVersion: v3
     appVersion: 1.2.6
     created: "2020-09-06T19:48:39.76039609Z"
@@ -398,6 +434,16 @@ entries:
     - https://github.com/fastlorenzo/unms-chart/releases/download/unms-crm-0.1.2/unms-crm-0.1.2.tgz
     version: 0.1.2
   unms-nginx:
+  - apiVersion: v2
+    appVersion: 1.2.6
+    created: "2020-09-06T20:31:03.510104881Z"
+    description: UNMS NGINX helm chart
+    digest: 929670a74c0a28efbaf0a6d8f25f9c63ba2c8351db3e348c9b276aa962fc24a6
+    name: unms-nginx
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-nginx-0.1.2/unms-nginx-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 1.2.6
     created: "2020-09-06T20:20:53.263197216Z"
