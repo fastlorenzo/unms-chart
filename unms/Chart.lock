@@ -13,6 +13,9 @@ dependencies:
   version: 0.1.4
 - name: unms-crm
   repository: https://fastlorenzo.github.io/unms-chart
-  version: 0.1.4
-digest: sha256:35f6710c39dc73013fd0ee5483374ca896fdb3eee7a1dff4f1793704671dc228
-generated: "2020-09-05T08:36:49.3837172+02:00"
+  version: 0.1.5
+- name: unms-nginx
+  repository: https://fastlorenzo.github.io/unms-chart
+  version: 0.1.0
+digest: sha256:a8eb9ee42bb02ed8dc88f62bcaa57094cf60c9063778904d84b34f4227fc86a5
+generated: "2020-09-06T21:43:52.167707+02:00"

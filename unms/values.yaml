@@ -9,7 +9,7 @@ fullnameOverride: ""
 podAnnotations: {}
   # iam.amazonaws.com/role: unms
 # image -- UNMS docker image name (use ubnt/unms for amd64, fastlorenzo/unms for arm/arm64)
-image: fastlorenzo/unms
+image: padhihomelab/unms
 # imageTag -- UNMS docker image tag
 imageTag: "latest"
 # imagePullPolicy -- UNMS docker image pull policy
@@ -24,6 +24,8 @@ labels: {}
 replicas: 1
 # clusterDomain -- Kubernetes Cluster Domain
 clusterDomain: cluster.local
+# unmsUserId -- UNMS User ID
+unmsUserId: 10001
 # resources -- UNMS pods resources
 resources: {}
   # requests:
@@ -79,7 +81,7 @@ postgresql:
       tag: 9.6
   persistence:
     mountPath: /data
-    existingClaim: "data-test-postgresql-0"
+    existingClaim: "unms-postgresql-0"
     size: 20Gi
   postgresqlDataDir: /data/data
   securityContext:
@@ -95,8 +97,10 @@ postgresql:
       cpu: "100m"
   postgresqlDatabase: unms
   postgresqlUsername: unms
-  existingSecret: test-postgresql
-  initdbScriptsConfigMap: test-unms-initdb
+  # postgresql.existingSecret -- Should be RELEASE_NAME-postgresql
+  existingSecret: unms-postgresql
+  # postgresql.initdbScriptsConfigMap -- Should be RELEASE_NAME-unms-initdb
+  initdbScriptsConfigMap: unms-unms-initdb
 
 # rabbitmq -- Bitnami RabbitMQ values to override
 rabbitmq:

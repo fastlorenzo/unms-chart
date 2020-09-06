@@ -38,38 +38,83 @@ spec:
         name: "{{ template "unms.fullname" . }}"
         imagePullPolicy: Always
         env:
-        - name: HTTP_PORT
-          value: '80'
-        - name: BEHIND_REVERSE_PROXY
-          value: "false"
-        - name: PROD
-          value: "true"
-        - name: DEMO
-          value: "false"
-        - name: UNMS_REDISDB_HOST
-          value: "{{ .Release.Name }}-redis-master"
-        - name: UNMS_PG_HOST
-          value: "{{ .Release.Name }}-postgresql"
-        - name: UNMS_PG_USER
-          value: "unms"
-        - name: UNMS_PG_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: "{{ .Release.Name }}-postgresql"
-              key: postgresql-password
-        - name: UNMS_RABBITMQ_HOST
-          value: "{{ .Release.Name }}-rabbitmq"
-        - name: UNMS_SIRIDB_HOST
-          value: "{{ .Release.Name }}-siridb"
         - name: UCRM_HOST
           value: "{{ .Release.Name }}-ucrm"
         - name: UCRM_PORT
           value: "80"
+        - name: UNMS_NGINX_HOST
+          value: "{{ .Release.Name }}-nginx"
+        - name: UNMS_NGINX_PORT
+          value: "12345"
+        - name: UNMS_PG_HOST
+          value: "{{ .Release.Name }}-postgresql"
+        - name: UNMS_PG_PORT
+          value: "5432"
+        - name: UNMS_RABBITMQ_HOST
+          value: "{{ .Release.Name }}-rabbitmq"
+        - name: UNMS_RABBITMQ_PORT
+          value: "5672"
+        - name: UNMS_REDISDB_HOST
+          value: "{{ .Release.Name }}-redis-master"
+        - name: UNMS_REDISDB_PORT
+          value: "6379"
+        - name: UNMS_SIRIDB_HOST
+          value: "{{ .Release.Name }}-siridb"
+        - name: UNMS_SIRIDB_PORT
+          value: "9000"
+        - name: UNMS_SIRIDB_PORT
+          value: "9000"
+        - name: NODE_ENV
+          value: "production"
+        - name: HTTP_PORT
+          value: "8081"
+        - name: WS_PORT
+          value: "8082"
+        - name: WS_SHELL_PORT
+          value: "8083"
+        - name: UNMS_WS_API_PORT
+          value: "8084"
+        - name: UNMS_NETFLOW_PORT
+          value: "2055"
+        - name: PUBLIC_HTTPS_PORT
+          value: "443"
+        - name: PUBLIC_WS_PORT
+          value: "443"
+        - name: NGINX_HTTPS_PORT
+          value: "443"
+        - name: NGINX_WS_PORT
+          value: "443"
+        - name: SUSPEND_PORT
+          value: "81"
+        - name: BRANCH
+          value: "master"
+        - name: SECURE_LINK_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-unms"
+              key: unms-token
         - name: UNMS_TOKEN
           valueFrom:
             secretKeyRef:
               name: "{{ .Release.Name }}-unms"
               key: unms-token
+        - name: CLUSTER_SIZE
+          value: "auto"
+        - name: UNMS_PG_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-postgresql"
+              key: postgresql-password
+        - name: UNMS_PG_USER
+          value: "unms"
+        - name: UNMS_PG_DB
+          value: "unms"
+        - name: UNMS_PG_SCHEMA
+          value: "unms"
+        - name: USE_LOCAL_DISCOVERY
+          value: "true"
+        - name: UNMS_USER_ID
+          value "{{ .Values.unmsUserId }}"
         {{- if .Values.persistence.enabled }}
         volumeMounts:
         - name: "storage"
@@ -95,9 +140,8 @@ spec:
   - metadata:
       name: "storage"
       labels:
-        app.kubernetes.io/name: "storage"
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        {{- include "unms.labels" . | nindent 8 }}
+        {{- include "unms.selectorLabels" . | nindent 8 }}
     spec:
       accessModes:
       {{- range .Values.persistence.accessModes }}
