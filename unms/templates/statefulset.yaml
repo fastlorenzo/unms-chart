@@ -114,7 +114,7 @@ spec:
         - name: USE_LOCAL_DISCOVERY
           value: "true"
         - name: UNMS_USER_ID
-          value "{{ .Values.unmsUserId }}"
+          value: "{{ .Values.unmsUserId }}"
         {{- if .Values.persistence.enabled }}
         volumeMounts:
         - name: "storage"
