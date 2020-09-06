@@ -1,5 +1,5 @@
-unms-crm
-========
+unms-nginx
+==========
 
 ## Installing the repo
 
@@ -20,21 +20,20 @@ helm repo update
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.repository | string | `"fastlorenzo/unms-crm"` |  |
-| image.tag | string | `"latest"` |  |
-| imagePullSecrets | list | `[]` |  |
+| image.repository | string | `"padhihomelab/unms"` |  |
+| image.tag | string | `"nginx"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"chart-example.local"` |  |
 | ingress.hosts[0].paths | list | `[]` |  |
 | ingress.tls | list | `[]` |  |
-| labels | object | `{}` | unms-crm pod extra labels |
+| labels | object | `{}` | unms-nginx pod extra labels |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | persistence.accessModes | list | `["ReadWriteOnce"]` | UNMS storage access modes |
 | persistence.annotations | object | `{}` |  |
 | persistence.enabled | bool | `false` | Persist UNMS data |
-| persistence.existingClaim | string | `"unms-unms-crm-nfs"` | Name of existing PVC for UNMS data |
+| persistence.existingClaim | string | `"unms-unms-nginx-nfs"` | Name of existing PVC for UNMS data |
 | persistence.size | string | `"10Gi"` | UNMS storage size |
 | persistence.storageClass | string | `""` | UNMS PV storage class name, keep empty to use default. Not used if `existingClaim` is set. |
 | podAnnotations | object | `{}` |  |
