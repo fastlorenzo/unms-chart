@@ -1,0 +1,104 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "unms-nginx.fullname" . }}
+  labels:
+    {{- include "unms-nginx.labels" . | nindent 4 }}
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceName: {{ include "unms-nginx.fullname" . }}
+  selector:
+    matchLabels:
+      {{- include "unms-nginx.selectorLabels" . | nindent 6 }}
+  podManagementPolicy: {{ .Values.podManagementPolicy }}
+  updateStrategy:
+    type: {{ .Values.updateStrategy }}
+  template:
+    metadata:
+      name: {{ include "unms-nginx.fullname" . }}
+      annotations:
+        {{- range $key, $value := .Values.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+      labels:
+        {{- include "unms-nginx.selectorLabels" . | nindent 8 }}
+        {{- range $key, $value := .Values.labels }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: "{{ template "unms-nginx.fullname" . }}"
+        env:
+        - name: NGINX_UID
+          value: "1000"
+        - name: HTTP_PORT
+          value: "80"
+        - name: HTTPS_PORT
+          value: "443"
+        - name: SUSPEND_PORT
+          value: "81"
+        - name: WS_PORT
+          value: "443"
+        - name: UNMS_HOST
+          value: "{{ .Release.Name }}-unms"
+        - name: UNMS_HTTP_PORT
+          value: "8081"
+        - name: UNMS_WS_PORT
+          value: "8082"
+        - name: UNMS_WS_SHELL_PORT
+          value: "8083"
+        - name: UNMS_WS_API_PORT
+          value: "8084"
+        - name: UNMS_IP_WHITELIST
+          value: ""
+        - name: UCRM_HOST
+          value: "{{ .Release.Name }}-unms-crm"
+        - name: UCRM_HTTP_PORT
+          value: "80"
+        - name: UCRM_SUSPEND_PORT
+          value: "81"
+        - name: UCRM_SUSPEND_PORT
+          value: "443"
+        - name: SECURE_LINK_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Release.Name }}-unms"
+              key: unms-token
+        {{- if .Values.persistence.enabled }}
+        volumeMounts:
+        - name: "firmwares"
+          mountPath: /data
+        {{- end }}
+        resources:
+          {{ toYaml .Values.resources | indent 10 }}
+      {{- if .Values.persistence.enabled }}
+  volumeClaimTemplates:
+  - metadata:
+      name: "firmwares"
+      labels:
+        {{- include "unms-nginx.labels" . | nindent 8 }}
+        {{- include "unms-nginx.selectorLabels" . | nindent 8 }}
+    spec:
+      accessModes:
+      {{- range .Values.persistence.accessModes }}
+        - {{ . | quote }}
+      {{- end }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size | quote }}
+      {{ if .Values.persistence.existingClaim }}
+      selector:
+        matchLabels:
+          name: {{ .Values.persistence.existingClaim | quote }}
+      {{- else }}
+        {{- if .Values.persistence.storageClass }}
+      storageClassName: {{ .Values.persistence.storageClass | quote }}
+        {{- end }}
+      {{- end }}
+  {{- end }}
