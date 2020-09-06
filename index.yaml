@@ -315,4 +315,15 @@ entries:
     urls:
     - https://github.com/fastlorenzo/unms-chart/releases/download/unms-crm-0.1.2/unms-crm-0.1.2.tgz
     version: 0.1.2
+  unms-nginx:
+  - apiVersion: v2
+    appVersion: 1.2.6
+    created: "2020-09-06T19:35:52.756626941Z"
+    description: UNMS NGINX helm chart
+    digest: 282cb2f406857bc97760596a4a152264553df8fd094c2cf24f378061f320c0c0
+    name: unms-nginx
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-nginx-0.1.0/unms-nginx-0.1.0.tgz
+    version: 0.1.0
 generated: "2020-08-30T18:51:48.513401971Z"
