@@ -400,6 +400,16 @@ entries:
   unms-nginx:
   - apiVersion: v2
     appVersion: 1.2.6
+    created: "2020-09-06T20:20:53.263197216Z"
+    description: UNMS NGINX helm chart
+    digest: 8959fb15038dd505a0334cab0be424a8d13c5f8fd37509e6088fdbceee8b16b8
+    name: unms-nginx
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/unms-nginx-0.1.1/unms-nginx-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.2.6
     created: "2020-09-06T19:35:52.756626941Z"
     description: UNMS NGINX helm chart
     digest: 282cb2f406857bc97760596a4a152264553df8fd094c2cf24f378061f320c0c0
