@@ -17,5 +17,7 @@ spec:
     name: suspend
   - port: 443
     name: https
+  - port: 12345
+    name: internal
   selector:
     {{- include "unms-nginx.selectorLabels" . | nindent 8 }}

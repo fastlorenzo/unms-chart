@@ -72,13 +72,37 @@ spec:
               key: unms-token
         {{- if .Values.persistence.enabled }}
         volumeMounts:
+        - name: "cert"
+          mountPath: /cert
         - name: "firmwares"
-          mountPath: /data
+          mountPath: /www/firmwares
         {{- end }}
         resources:
           {{ toYaml .Values.resources | indent 10 }}
-      {{- if .Values.persistence.enabled }}
+  {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
+  - metadata:
+      name: "cert"
+      labels:
+        {{- include "unms-nginx.labels" . | nindent 8 }}
+        {{- include "unms-nginx.selectorLabels" . | nindent 8 }}
+    spec:
+      accessModes:
+      {{- range .Values.persistence.cert.accessModes }}
+        - {{ . | quote }}
+      {{- end }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.cert.size | quote }}
+      {{ if .Values.persistence.cert.existingClaim }}
+      selector:
+        matchLabels:
+          name: {{ .Values.persistence.cert.existingClaim | quote }}
+      {{- else }}
+        {{- if .Values.persistence.cert.storageClass }}
+      storageClassName: {{ .Values.persistence.cert.storageClass | quote }}
+        {{- end }}
+      {{- end }}
   - metadata:
       name: "firmwares"
       labels:
@@ -86,19 +110,19 @@ spec:
         {{- include "unms-nginx.selectorLabels" . | nindent 8 }}
     spec:
       accessModes:
-      {{- range .Values.persistence.accessModes }}
+      {{- range .Values.persistence.firmwares.accessModes }}
         - {{ . | quote }}
       {{- end }}
       resources:
         requests:
-          storage: {{ .Values.persistence.size | quote }}
-      {{ if .Values.persistence.existingClaim }}
+          storage: {{ .Values.persistence.firmwares.size | quote }}
+      {{ if .Values.persistence.firmwares.existingClaim }}
       selector:
         matchLabels:
-          name: {{ .Values.persistence.existingClaim | quote }}
+          name: {{ .Values.persistence.firmwares.existingClaim | quote }}
       {{- else }}
-        {{- if .Values.persistence.storageClass }}
-      storageClassName: {{ .Values.persistence.storageClass | quote }}
+        {{- if .Values.persistence.firmwares.storageClass }}
+      storageClassName: {{ .Values.persistence.firmwares.storageClass | quote }}
         {{- end }}
       {{- end }}
   {{- end }}

@@ -43,17 +43,24 @@ service:
   type: ClusterIP
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  # ingress.enabled -- Enable Ingress controller
+  enabled: true
+  # ingress.annotations -- Ingress annotations
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "step-issuer"
+    cert-manager.io/acme-challenge-type: http01
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  # ingress.hosts -- Ingress hosts configuration
   hosts:
-    - host: chart-example.local
-      paths: []
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    - host: unms.bernardi.local
+      paths:
+        - /
+  # ingress.tls -- Ingress TLS configuration
+  tls:
+    - hosts:
+      - unms.bernardi.local
+      secretName: unms-bernardi-local-tls
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -70,17 +77,30 @@ resources: {}
 persistence:
   # persistence.enabled -- Persist UNMS data
   enabled: false
-  annotations: {}
-  # persistence.existingClaim -- Name of existing PVC for UNMS data
-  existingClaim: "unms-unms-nginx-nfs"
-  # persistence.accessModes -- UNMS storage access modes
-  accessModes:
-    - ReadWriteOnce
-  # persistence.size -- UNMS storage size
-  size: 10Gi
-  # persistence.storageClass -- UNMS PV storage class name, keep empty to use default.
-  # Not used if `existingClaim` is set.
-  storageClass: ""
+  cert:
+    annotations: {}
+    # persistence.cert.existingClaim -- Name of existing PVC for UNMS cert
+    existingClaim: "unms-storage-cert-nfs"
+    # persistence.cert.accessModes -- UNMS storage access modes
+    accessModes:
+      - ReadWriteOnce
+    # persistence.cert.size -- UNMS storage size
+    size: 10Gi
+    # persistence.cert.storageClass -- UNMS PV storage class name, keep empty to use default.
+    # Not used if `existingClaim` is set.
+    storageClass: ""
+  firmwares:
+    annotations: {}
+    # persistence.firmwares.existingClaim -- Name of existing PVC for UNMS firmwares
+    existingClaim: "unms-storage-firmwares-nfs"
+    # persistence.firmwares.accessModes -- UNMS storage access modes
+    accessModes:
+      - ReadWriteOnce
+    # persistence.firmwares.size -- UNMS storage size
+    size: 10Gi
+    # persistence.firmwares.storageClass -- UNMS PV storage class name, keep empty to use default.
+    # Not used if `existingClaim` is set.
+    storageClass: ""
 
 autoscaling:
   enabled: false
