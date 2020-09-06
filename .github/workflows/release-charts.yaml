@@ -8,6 +8,7 @@ on:
       - 'siridb/**'
       - 'unms/**'
       - 'unms-crm/**'
+      - 'unms-nginx/**'
       - '.github/workflows/release-charts.yaml'
 jobs:
   release:

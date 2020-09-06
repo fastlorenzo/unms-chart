@@ -7,12 +7,14 @@ on:
     paths:
       - 'unms/**'
       - 'unms-crm/**'
+      - 'unms-nginx/**'
       - 'siridb/**'
       - '.github/**'
   pull_request:
     paths:
       - 'unms/**'
       - 'unms-crm/**'
+      - 'unms-nginx/**'
       - 'siridb/**'
       - '.github/**'
 
