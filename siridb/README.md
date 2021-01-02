@@ -19,8 +19,8 @@ helm repo update
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.repository | string | `"fastlorenzo/siridb-server"` |  |
-| image.tag | string | `"latest"` |  |
+| image.repository | string | `"padhihomelab/unms"` |  |
+| image.tag | string | `"siridb-1.2.7"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |

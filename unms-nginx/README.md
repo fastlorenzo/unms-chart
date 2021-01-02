@@ -21,7 +21,7 @@ helm repo update
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.repository | string | `"padhihomelab/unms"` |  |
-| image.tag | string | `"nginx"` |  |
+| image.tag | string | `"nginx-1.2.7"` |  |
 | ingress.annotations | object | `{"cert-manager.io/acme-challenge-type":"http01","cert-manager.io/cluster-issuer":"step-issuer","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/backend-protocol":"HTTPS"}` | Ingress annotations |
 | ingress.enabled | bool | `true` | Enable Ingress controller |
 | ingress.hosts | list | `[{"host":"unms.bernardi.local","paths":["/"]}]` | Ingress hosts configuration |

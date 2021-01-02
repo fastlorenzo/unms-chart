@@ -16,7 +16,7 @@ helm repo update
 | fullnameOverride | string | `""` |  |
 | image | string | `"padhihomelab/unms"` | UNMS docker image name (use ubnt/unms for amd64, fastlorenzo/unms for arm/arm64) |
 | imagePullPolicy | string | `"Always"` | UNMS docker image pull policy |
-| imageTag | string | `"latest"` | UNMS docker image tag |
+| imageTag | string | `"1.2.7"` | UNMS docker image tag |
 | ingress.annotations | object | `{"cert-manager.io/acme-challenge-type":"http01","cert-manager.io/cluster-issuer":"step-issuer","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/backend-protocol":"HTTPS"}` | Ingress annotations |
 | ingress.enabled | bool | `false` | Enable Ingress controller |
 | ingress.hosts | list | `[{"host":"unms.bernardi.local","paths":["/"]}]` | Ingress hosts configuration |
