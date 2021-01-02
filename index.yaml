@@ -3,6 +3,16 @@ entries:
   siridb:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-01-02T21:17:09.71582687Z"
+    description: SiriDB helm chart
+    digest: 7e493ab066014323f5e3c22fd75105367c4d8a192f67f12b1f9d6b95f7c19af9
+    name: siridb
+    type: application
+    urls:
+    - https://github.com/fastlorenzo/unms-chart/releases/download/siridb-0.2.1/siridb-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2020-09-05T06:33:47.16669562Z"
     description: SiriDB helm chart
     digest: 001b9f6894f31c50e318c6f8eb1667da557926d0ea423249e950368255c1cff4
