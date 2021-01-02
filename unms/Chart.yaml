@@ -24,11 +24,11 @@ dependencies:
     version: ~10.7.17
     repository: https://charts.bitnami.com/bitnami
   - name: siridb
-    version: ~0.1.5
+    version: ~0.1.4
     repository: https://fastlorenzo.github.io/unms-chart
   - name: unms-crm
-    version: ~0.1.3
+    version: ~0.1.2
     repository: https://fastlorenzo.github.io/unms-chart
   - name: unms-nginx
-    version: ~0.1.1
+    version: ~0.1.0
     repository: https://fastlorenzo.github.io/unms-chart
