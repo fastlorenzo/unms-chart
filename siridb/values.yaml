@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: fastlorenzo/siridb-server
+  repository: padhihomelab/unms
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "siridb-1.2.7"
 
 imagePullSecrets: []
 nameOverride: ""
