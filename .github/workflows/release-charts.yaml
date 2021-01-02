@@ -19,8 +19,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch history
-        run: git fetch --prune --unshallow
+      #- name: Fetch history
+      #  run: git fetch --prune --unshallow
       
       - name: Configure Git
         run: |
