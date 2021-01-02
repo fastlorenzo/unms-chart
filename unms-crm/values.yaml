@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: fastlorenzo/unms-crm
+  repository: padhihomelab/unms
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "ucrm-1.2.7"
 
 imagePullSecrets: []
 nameOverride: ""

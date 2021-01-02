@@ -11,7 +11,7 @@ podAnnotations: {}
 # image -- UNMS docker image name (use ubnt/unms for amd64, fastlorenzo/unms for arm/arm64)
 image: padhihomelab/unms
 # imageTag -- UNMS docker image tag
-imageTag: "latest"
+imageTag: "1.2.7"
 # imagePullPolicy -- UNMS docker image pull policy
 imagePullPolicy: "Always"
 # podManagementPolicy -- UNMS pods management policy

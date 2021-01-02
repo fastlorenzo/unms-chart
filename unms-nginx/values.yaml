@@ -8,7 +8,7 @@ image:
   repository: padhihomelab/unms
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "nginx"
+  tag: "nginx-1.2.7"
 
 #imagePullSecrets: []
 nameOverride: ""
