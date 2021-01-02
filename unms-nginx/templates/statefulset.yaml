@@ -46,7 +46,7 @@ spec:
         - name: WS_PORT
           value: "443"
         - name: UNMS_HOST
-          value: "{{ .Release.Name }}-unms"
+          value: "{{ .Release.Name }}-unms.{{ .Release.Namespace }}.svc.cluster.local"
         - name: UNMS_HTTP_PORT
           value: "8081"
         - name: UNMS_WS_PORT
@@ -58,7 +58,7 @@ spec:
         - name: UNMS_IP_WHITELIST
           value: ""
         - name: UCRM_HOST
-          value: "{{ .Release.Name }}-unms-crm"
+          value: "{{ .Release.Name }}-unms-crm.{{ .Release.Namespace }}.svc.cluster.local"
         - name: UCRM_HTTP_PORT
           value: "80"
         - name: UCRM_SUSPEND_PORT
